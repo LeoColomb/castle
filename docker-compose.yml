@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  castle:
+    image: traefik:2.0
+    command: --api --providers.docker --providers.kubernetes --providers.file --providers.file.directory="/opt/castle" --providers.file.watch=true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.config/castle:/opt/castle
+    labels:
+      traefik.HTTP.Routers.Castle.Rule: "Host(`castle.localhost`)"
+      traefik.HTTP.Services.Castle.LoadBalancer.server.Port: 8080
