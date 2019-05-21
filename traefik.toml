@@ -19,8 +19,6 @@
   [Providers.Docker]
     DefaultRule = "Host(`{{ normalize .Name }}.localhost`)"
   [Providers.Kubernetes]
-    DefaultRule = "Host(`{{ normalize .Name }}.localhost`)"
   [Providers.File]
-    DefaultRule = "Host(`{{ normalize .Name }}.localhost`)"
     Directory = "/opt/castle/services"
     Watch = true
