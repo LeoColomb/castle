@@ -1,24 +1,20 @@
-[Global]
-  Debug = true
+[api]
+  insecure = true
+  dashboard = true
+  debug = true
 
-[API]
+[accessLog]
 
-[EntryPoints]
-  [EntryPoints.http]
-    Address = ":80"
-  [EntryPoints.https]
-    Address = ":443"
+[entryPoints]
+  [entryPoints.http]
+    address = ":80"
+  [entryPoints.https]
+    address = ":443"
 
-[TLSStores]
-  [TLSStores.localhost]
-    [TLSStores.localhost.DefaultCertificate]
-      CertFile = "/opt/castle/certs/localhost.crt"
-      KeyFile  = "/opt/castle/certs/localhost.key"
-
-[Providers]
-  [Providers.Docker]
-    DefaultRule = "Host(`{{ normalize .Name }}.localhost`)"
-  [Providers.Kubernetes]
-  [Providers.File]
-    Directory = "/opt/castle/services"
-    Watch = true
+[providers]
+  [providers.docker]
+    defaultRule = "Host(`{{ normalize .Name }}.localhost`)"
+  [providers.kubernetesIngress]
+  [providers.file]
+    directory = "/opt/castle/services"
+    watch = true
