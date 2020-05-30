@@ -12,7 +12,7 @@ services:
       - ~/.config/castle:/opt/castle
     labels:
       - "traefik.http.services.castle.loadBalancer.server.port=8080"
-      - "traefik.http.routers.castle.rule=Host(`castle.localhost`)"
+      - "traefik.http.routers.castle.tls=true"
 
 networks:
   default:
