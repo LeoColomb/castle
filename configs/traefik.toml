@@ -1,0 +1,20 @@
+[api]
+  insecure = true
+  dashboard = true
+  debug = true
+
+[accessLog]
+
+[entryPoints]
+  [entryPoints.http]
+    address = ":80"
+  [entryPoints.https]
+    address = ":443"
+
+[providers]
+  [providers.docker]
+    defaultRule = "Host(`{{ normalize .Name }}.localhost`)"
+  [providers.kubernetesIngress]
+  [providers.file]
+    directory = "/opt/castle/services"
+    watch = true

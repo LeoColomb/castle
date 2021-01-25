@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  castle:
+    image: traefik:latest
+    command: --configFile=/opt/castle/traefik.toml
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.config/castle:/opt/castle
+    labels:
+      - "traefik.http.services.castle.loadBalancer.server.port=8080"
+      - "traefik.http.routers.castle.tls=true"
+
+networks:
+  default:
+    driver: bridge
